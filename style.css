@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: purple;
+}
+
+h1 {
+    color: aqua;
+}
+
+#calculatorMain {
+    display: flex;
+    flex-direction: column;
+}
+
+#buttonWrapper {
+    display: flex;
+    
+}
