@@ -6,14 +6,74 @@ body {
 
 h1 {
     color: aqua;
+    text-align: center;
+}
+
+#wrapper {
+    display: flex;
+    justify-content: center;
 }
 
 #calculatorMain {
+    display: grid;
+    border: solid 5px black;
+    height: 500px;
+    width: 500px;
+    grid-template-areas: 
+    "display display display"
+    "calcOption calcOption calcOption"
+    "buttons operators operators";
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+#calculatorResult {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-area: display;
+    background-color: grey;
+    height: 5em;
+    width: 305px;
+    border-radius: 10px;
+}
+#numberWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    height: 300px;
+    width: 300px;
+    grid-area: buttons;
+    margin-top: 10px;
+ 
 }
 
-#buttonWrapper {
-    display: flex;
-    
+ #calculatorOptions {
+     display: flex;
+     height: 50px;
+     width: 100px;
+     align-items: center;
+     justify-content: space-between;
+     grid-area: calcOption;
+     margin-top: 10px;
+ }
+#operators {
+    display: grid;
+    flex-direction: column;
+    grid-area: operators;
+    justify-self: center;
+    align-self: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    height: 300px;
+    width: 100px;
+    margin-top: 10px;
+}
+
+#clear, #backspace {
+    border-radius: 10px;
+    height: 3em;
+    width: 300px;
+    margin-right: 10px;
 }

@@ -1,6 +1,5 @@
 # Calculator
-project idea came from The Odin Project (TOP)
+
+Basic Web Calculator - made with JavaScript, HTML, CSS
 <br>
-Web Calculator - made with JavaScript, HTML, CSS
-
-
+project idea came from The Odin Project (TOP)
