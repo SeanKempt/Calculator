@@ -1,11 +1,11 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: purple;
+    background-color: #f6f6f6;
 }
 
 h1 {
-    color: aqua;
+    color: black;
     text-align: center;
 }
 
@@ -16,9 +16,10 @@ h1 {
 
 #calculatorMain {
     display: grid;
-    border: solid 5px black;
+    border: solid 5px #333;
     height: 500px;
-    width: 500px;
+    width: 400px;
+    background-color: #aaa;
     grid-template-areas: 
     "display display display"
     "calcOption calcOption calcOption"
@@ -27,32 +28,41 @@ h1 {
     align-items: center;
     justify-content: center;
     align-content: center;
+    border-radius: 10%;
+    padding: 0;
 }
-#calculatorResult {
+#resultWrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     grid-area: display;
-    background-color: grey;
+    background-color: #eee;
     height: 5em;
-    width: 305px;
+    width: 370px;
     border-radius: 10px;
+    border: solid 2px #333;
 }
+
+#calcResult {
+    font-size: 24px;
+}
+
 #numberWrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr;
     height: 300px;
-    width: 300px;
+    width: 250px;
     grid-area: buttons;
     margin-top: 10px;
+    gap: 5px 5px;
  
 }
 
  #calculatorOptions {
      display: flex;
      height: 50px;
-     width: 100px;
+     width: 300px;
      align-items: center;
      justify-content: space-between;
      grid-area: calcOption;
@@ -69,11 +79,17 @@ h1 {
     height: 300px;
     width: 100px;
     margin-top: 10px;
+    gap: 5px 5px
 }
 
 #clear, #backspace {
     border-radius: 10px;
-    height: 3em;
-    width: 300px;
+    height: 2em;
+    width: 100%;
     margin-right: 10px;
+}
+
+.calculatorButtons {
+    border-radius: 5px;
+    font-size: 22px;
 }
