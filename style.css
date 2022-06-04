@@ -33,7 +33,7 @@ h1 {
 }
 #resultWrapper {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     grid-area: display;
     background-color: #eee;
@@ -45,6 +45,7 @@ h1 {
 
 #calcResult {
     font-size: 24px;
+    margin-right: 1em;
 }
 
 #numberWrapper {
@@ -99,7 +100,7 @@ h1 {
     color: white;
 }
 
-.calculatorButtons {
+.calculatorButtons, .optionButtons, .operatorButtons {
     border-radius: 5px;
     font-size: 22px;
 }
