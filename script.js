@@ -39,3 +39,6 @@ calculatorButtons.forEach((button) => {
     displayValue = Number(displayValue); //Converts string to number for use in calculator functions
   });
 });
+
+/*Next steps: When operator button is pressed, its the only thing that shows in the display value and probably store
+in a variable as a string to pass to the operator function ---- also fix the issue with the zero not showing up */
