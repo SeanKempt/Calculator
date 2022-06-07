@@ -28,17 +28,41 @@ let operate = function (operator, a, b) {
       return console.log("error: something happened");
   }
 };
-const display = document.getElementById("calcResult");
+
 let displayValue;
-const calculatorButtons = document.querySelectorAll(".calculatorButtons");
-/* Adds event listener to all the calculator buttons and then updates the display with whatever button is clicked */
-calculatorButtons.forEach((button) => {
-  display.textContent = ""; //Sets the value to a empty string to remove the intial value of the calculator
-  button.addEventListener("click", function updateDisplay() {
-    displayValue = display.textContent += button.textContent; //can't convert here because we need string for display on calculator
-    displayValue = Number(displayValue); //Converts string to number for use in calculator functions
+const display = document.getElementById("calcResult");
+const calculatorKeys = document.querySelectorAll(".calculatorKey");
+
+calculatorKeys.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    if (e.target.matches("button")) {
+      const key = e.target;
+      const action = key.dataset.action;
+
+      if (!action) {
+        console.log("number key!");
+      }
+
+      if (
+        action === "add" ||
+        action === "subtract" ||
+        action === "multiply" ||
+        action === "divide"
+      ) {
+        console.log("operator key!");
+      }
+
+      if (action === "clear") {
+        console.log("clear");
+      }
+
+      if (action === "backspace") {
+        console.log("backspace");
+      }
+
+      if (action === "calculate") {
+        console.log("calculate");
+      }
+    }
   });
 });
-
-/*Next steps: When operator button is pressed, its the only thing that shows in the display value and probably store
-in a variable as a string to pass to the operator function ---- also fix the issue with the zero not showing up */

@@ -11,34 +11,34 @@
 <body>
     <h1>Basic Calculator</h1>
     <div id="wrapper">
-        <div id="calculatorMain">
+        <div id="calculatorMain" class="calculator">
             <div id="resultWrapper">
                 <p id="calcResult">0</p>
             </div>
             <div id="calculatorOptions">
-                <button id="clear" class="optionButtons">Clear</button>
-                <button id="backspace" class="optionButtons">Back</button>
+                <button id="clear" class="optionButtons calculatorKey" data-action="clear">Clear</button>
+                <button id="backspace" class="optionButtons calculatorKey" data-action="backspace">Back</button>
             </div>
             <div id="numberWrapper">
-                <button id="seven" class="calculatorButtons">7</button>
-                <button id="eight" class="calculatorButtons">8</button>
-                <button id="nine" class="calculatorButtons">9</button>
-                <button id="four" class="calculatorButtons">4</button>
-                <button id="five" class="calculatorButtons">5</button>
-                <button id="six" class="calculatorButtons">6</button>
-                <button id="one" class="calculatorButtons">1</button>
-                <button id="two" class="calculatorButtons">2</button>
-                <button id="three" class="calculatorButtons">3</button>
-                <button id="plusMinus" class="calculatorButtons">+/-</button>
-                <button id="zero" class="calculatorButtons">0</button>
-                <button id="decimal" class="calculatorButtons">.</button>
+                <button id="seven" class="calculatorButtons calculatorKey">7</button>
+                <button id="eight" class="calculatorButtons calculatorKey">8</button>
+                <button id="nine" class="calculatorButtons calculatorKey">9</button>
+                <button id="four" class="calculatorButtons calculatorKey">4</button>
+                <button id="five" class="calculatorButtons calculatorKey">5</button>
+                <button id="six" class="calculatorButtons calculatorKey">6</button>
+                <button id="one" class="calculatorButtons calculatorKey">1</button>
+                <button id="two" class="calculatorButtons calculatorKey">2</button>
+                <button id="three" class="calculatorButtons calculatorKey">3</button>
+                <button id="plusMinus" class="calculatorButtons calculatorKey">+/-</button>
+                <button id="zero" class="calculatorButtons calculatorKey">0</button>
+                <button id="decimal" class="calculatorButtons calculatorKey">.</button>
             </div>
             <div id="operators">
-                <button id="add" class="operatorButtons">+</button>
-                <button id="subtract" class="operatorButtons">-</button>
-                <button id="multiply" class="operatorButtons">*</button>
-                <button id="divide" class="operatorButtons">/</button>
-                <button id="equals" class="operatorButtons">=</button>
+                <button id="add" class="operatorButtons calculatorKey" data-action="add">+</button>
+                <button id="subtract" class="operatorButtons calculatorKey" data-action="subtract">-</button>
+                <button id="multiply" class="operatorButtons calculatorKey" data-action="multiply">*</button>
+                <button id="divide" class="operatorButtons calculatorKey" data-action="divide">/</button>
+                <button id="equals" class="operatorButtons calculatorKey" data-action="calculate">=</button>
             </div>
         </div>
 
