@@ -29,7 +29,6 @@ let operate = function (operator, a, b) {
   }
 };
 
-let displayValue;
 const display = document.getElementById("calcResult");
 const calculatorKeys = document.querySelectorAll(".calculatorKey");
 
@@ -38,9 +37,15 @@ calculatorKeys.forEach((button) => {
     if (e.target.matches("button")) {
       const key = e.target;
       const action = key.dataset.action;
+      const keyValue = key.textContent;
+      const displayValue = display.textContent;
 
       if (!action) {
-        console.log("number key!");
+        if (displayValue === "0") {
+          display.textContent = keyValue;
+        } else {
+          display.textContent += keyValue;
+        }
       }
 
       if (
