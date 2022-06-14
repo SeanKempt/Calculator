@@ -1,28 +1,28 @@
 let addition = function (a, b) {
-  return a + b;
+  return parseFloat(a) + parseFloat(b);
 };
 
 let subtraction = function (a, b) {
-  return a - b;
+  return parseFloat(a) - ParseFloat(b);
 };
 
 let multiply = function (a, b) {
-  return a * b;
+  return parseFloat(a) * parseFloat(b);
 };
 
 let divide = function (a, b) {
-  return a / b;
+  return parseFloat(a) / ParseFloat(b);
 };
 
 let operate = function (operator, a, b) {
   switch (operator) {
-    case "+":
+    case "add":
       return addition(a, b);
-    case "-":
+    case "subtract":
       return subtraction(a, b);
-    case "*":
+    case "multiply":
       return multiply(a, b);
-    case "/":
+    case "divide":
       return divide(a, b);
     default:
       return console.log("error: something happened");
@@ -32,6 +32,7 @@ let operate = function (operator, a, b) {
 const display = document.getElementById("calcResult");
 const calculatorKeys = document.querySelectorAll(".calculatorKey");
 const calculatorOperator = document.querySelector(".operatorButtons");
+const calculator = document.querySelector(".calculator");
 
 calculatorKeys.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -40,20 +41,23 @@ calculatorKeys.forEach((button) => {
       const action = key.dataset.action;
       const keyValue = key.textContent;
       const displayValue = display.textContent;
-      const lastKeyType = calculatorOperator.dataset.lastKeyPress;
+      const lastKeyType = calculator.dataset.lastKeyPress;
 
       if (!action) {
         if (displayValue === "0" || lastKeyType === "operator") {
           //If the displayed value is zero. Replace zero with pressed button value.
           display.textContent = keyValue;
+          calculator.dataset.lastKeyPress = "number";
         } else {
           //If the displayed value is not zero append displayed value with pressed button value.
           display.textContent += keyValue;
+          calculator.dataset.lastKeyPress = "number";
         }
       }
 
       if (action === "decimal") {
         display.textContent = displayValue + ".";
+        calculator.dataset.lastKeyPress = "decimal";
       }
 
       if (
@@ -62,20 +66,27 @@ calculatorKeys.forEach((button) => {
         action === "multiply" ||
         action === "divide"
       ) {
-        calculatorOperator.dataset.lastKeyPress = "operator";
-        console.log("operator key!");
+        calculator.dataset.lastKeyPress = "operator";
+        calculator.dataset.firstValue = displayValue;
+        calculator.dataset.operator = action;
       }
 
       if (action === "clear") {
-        console.log("clear");
+        calculator.dataset.lastKeyPress = "clear";
+        display.textContent = "0";
       }
 
       if (action === "backspace") {
-        console.log("backspace");
+        calculator.dataset.lastKeyPress = "backspace";
       }
 
       if (action === "calculate") {
-        console.log("calculate");
+        calculator.dataset.lastKeyPress = "calculate";
+        const firstValue = calculator.dataset.firstValue;
+        const operator = calculator.dataset.operator;
+        const secondValue = displayValue;
+
+        display.textContent = operate(operator, firstValue, secondValue);
       }
     }
   });
