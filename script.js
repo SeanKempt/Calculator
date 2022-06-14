@@ -31,6 +31,7 @@ let operate = function (operator, a, b) {
 
 const display = document.getElementById("calcResult");
 const calculatorKeys = document.querySelectorAll(".calculatorKey");
+const calculatorOperator = document.querySelector(".operatorButtons");
 
 calculatorKeys.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -39,13 +40,20 @@ calculatorKeys.forEach((button) => {
       const action = key.dataset.action;
       const keyValue = key.textContent;
       const displayValue = display.textContent;
+      const lastKeyType = calculatorOperator.dataset.lastKeyPress;
 
       if (!action) {
-        if (displayValue === "0") {
+        if (displayValue === "0" || lastKeyType === "operator") {
+          //If the displayed value is zero. Replace zero with pressed button value.
           display.textContent = keyValue;
         } else {
+          //If the displayed value is not zero append displayed value with pressed button value.
           display.textContent += keyValue;
         }
+      }
+
+      if (action === "decimal") {
+        display.textContent = displayValue + ".";
       }
 
       if (
@@ -54,6 +62,7 @@ calculatorKeys.forEach((button) => {
         action === "multiply" ||
         action === "divide"
       ) {
+        calculatorOperator.dataset.lastKeyPress = "operator";
         console.log("operator key!");
       }
 
