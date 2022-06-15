@@ -34,6 +34,7 @@ const calculatorKeys = document.querySelectorAll(".calculatorKey");
 const calculator = document.querySelector(".calculator");
 const calcOperators = document.querySelectorAll(".operatorButtons");
 
+//Need to refactor this event listener function severly
 calculatorKeys.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (e.target.matches("button")) {
@@ -63,7 +64,7 @@ calculatorKeys.forEach((button) => {
           calculator.dataset.lastKeyPress = "number";
         }
       }
-      //If decimal key is pressed more than once. The decimal should only still show once.
+      //If decimal key is pressed more than once. The decimal should still only show once.
       if (action === "decimal") {
         if (!displayValue.includes(".")) {
           display.textContent = displayValue + ".";
@@ -117,8 +118,8 @@ calculatorKeys.forEach((button) => {
             0,
             display.textContent.length - 1
           );
+          //removes the blue effect from the selected operator
           calcOperators.forEach((e) => {
-            //removes the blue effect from the selected operator
             e.classList.remove("ispressed");
           });
         } else if (displayValue.length === 1) {
