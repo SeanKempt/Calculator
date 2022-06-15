@@ -11,7 +11,7 @@ let multiply = function (a, b) {
 };
 
 let divide = function (a, b) {
-  return parseFloat(a) / ParseFloat(b);
+  return parseFloat(a) / parseFloat(b);
 };
 
 let operate = function (operator, a, b) {
@@ -32,6 +32,7 @@ let operate = function (operator, a, b) {
 const display = document.getElementById("calcResult");
 const calculatorKeys = document.querySelectorAll(".calculatorKey");
 const calculator = document.querySelector(".calculator");
+const calcOperators = document.querySelectorAll(".operatorButtons");
 
 calculatorKeys.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -41,6 +42,7 @@ calculatorKeys.forEach((button) => {
       const keyValue = key.textContent;
       const displayValue = display.textContent;
       const lastKeyType = calculator.dataset.lastKeyPress;
+      let firstValue;
 
       Array.from(key.parentNode.children).forEach((op) =>
         op.classList.remove("ispressed")
@@ -77,18 +79,62 @@ calculatorKeys.forEach((button) => {
         action === "multiply" ||
         action === "divide"
       ) {
+        const firstValue = calculator.dataset.firstValue;
+        const operator = calculator.dataset.operator;
+        const secondValue = displayValue;
         calculator.dataset.lastKeyPress = "operator";
         calculator.dataset.firstValue = displayValue;
         calculator.dataset.operator = action;
         key.classList.add("ispressed");
+
+        if (
+          firstValue &&
+          operator &&
+          lastKeyType !== "operator" &&
+          lastKeyType !== "calculate"
+        ) {
+          const calculatedValue = operate(firstValue, operator, secondValue);
+          display.textContent = calculatedValue;
+          calculator.dataset.firstValue = calculatedValue;
+        } else {
+          calculator.dataset.firstValue = displayValue;
+        }
       }
 
       if (action === "clear") {
+        calculator.dataset.firstValue = "";
+        calculator.dataset.operator = "";
+        calculator.dataset.lastKeyPress = "";
         calculator.dataset.lastKeyPress = "clear";
         display.textContent = "0";
       }
 
       if (action === "backspace") {
+        /* If the display value does not equal zero and doesn't have a length of 1, reduce the length of the display value
+        string by 1. Else if the length is 1 set the display value back to zero. */
+        if (displayValue !== "0" && displayValue.length !== 1) {
+          display.textContent = display.textContent.slice(
+            0,
+            display.textContent.length - 1
+          );
+          calcOperators.forEach((e) => {
+            //removes the blue effect from the selected operator
+            e.classList.remove("ispressed");
+          });
+        } else if (displayValue.length === 1) {
+          display.textContent = "0";
+          calcOperators.forEach((e) => {
+            e.classList.remove("ispressed");
+          });
+        }
+
+        if (firstValue !== null) {
+          calculator.dataset.operator = "";
+          calculator.dataset.firstValue = "";
+          calcOperators.forEach((e) => {
+            e.classList.remove("ispressed");
+          });
+        }
         calculator.dataset.lastKeyPress = "backspace";
       }
 
@@ -102,6 +148,11 @@ calculatorKeys.forEach((button) => {
          to solve for clicking calculate after pressing an operator */
         if (firstValue && operator && lastKeyType !== "operator") {
           display.textContent = operate(operator, firstValue, secondValue);
+        }
+        /* checks if the first value exsits and if the last key type was the equals button. 
+        To continue to display the display value */
+        if (firstValue && lastKeyType === "calculate") {
+          return display.textContent;
         }
       }
     }
