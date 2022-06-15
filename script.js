@@ -3,7 +3,7 @@ let addition = function (a, b) {
 };
 
 let subtraction = function (a, b) {
-  return parseFloat(a) - ParseFloat(b);
+  return parseFloat(a) - parseFloat(b);
 };
 
 let multiply = function (a, b) {
@@ -31,7 +31,6 @@ let operate = function (operator, a, b) {
 
 const display = document.getElementById("calcResult");
 const calculatorKeys = document.querySelectorAll(".calculatorKey");
-const calculatorOperator = document.querySelector(".operatorButtons");
 const calculator = document.querySelector(".calculator");
 
 calculatorKeys.forEach((button) => {
@@ -43,8 +42,16 @@ calculatorKeys.forEach((button) => {
       const displayValue = display.textContent;
       const lastKeyType = calculator.dataset.lastKeyPress;
 
+      Array.from(key.parentNode.children).forEach((op) =>
+        op.classList.remove("ispressed")
+      );
+
       if (!action) {
-        if (displayValue === "0" || lastKeyType === "operator") {
+        if (
+          displayValue === "0" ||
+          lastKeyType === "operator" ||
+          lastKeyType === "calculate"
+        ) {
           //If the displayed value is zero. Replace zero with pressed button value.
           display.textContent = keyValue;
           calculator.dataset.lastKeyPress = "number";
@@ -54,9 +61,13 @@ calculatorKeys.forEach((button) => {
           calculator.dataset.lastKeyPress = "number";
         }
       }
-
+      //If decimal key is pressed more than once. The decimal should only still show once.
       if (action === "decimal") {
-        display.textContent = displayValue + ".";
+        if (!displayValue.includes(".")) {
+          display.textContent = displayValue + ".";
+        } else if (lastKeyType === "operator") {
+          display.textContent = "0.";
+        }
         calculator.dataset.lastKeyPress = "decimal";
       }
 
@@ -69,6 +80,7 @@ calculatorKeys.forEach((button) => {
         calculator.dataset.lastKeyPress = "operator";
         calculator.dataset.firstValue = displayValue;
         calculator.dataset.operator = action;
+        key.classList.add("ispressed");
       }
 
       if (action === "clear") {
@@ -86,7 +98,11 @@ calculatorKeys.forEach((button) => {
         const operator = calculator.dataset.operator;
         const secondValue = displayValue;
 
-        display.textContent = operate(operator, firstValue, secondValue);
+        /*Checks if first value and operator exists and ensures that the last key type was not an operator
+         to solve for clicking calculate after pressing an operator */
+        if (firstValue && operator && lastKeyType !== "operator") {
+          display.textContent = operate(operator, firstValue, secondValue);
+        }
       }
     }
   });

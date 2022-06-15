@@ -110,3 +110,7 @@ h1 {
     transform: translateY(2px);
 }
 
+.ispressed {
+    background-color: hsla(196, 74%, 57%, 0.63);
+}
+
